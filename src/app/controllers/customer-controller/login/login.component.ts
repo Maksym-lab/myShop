@@ -11,6 +11,5 @@ export class LoginComponent  {
     private router: Router) { }
   login(){
     this.authService.loginGoogle();
-    this.router.navigate(["/products"]);
   }
 }

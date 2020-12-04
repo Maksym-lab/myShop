@@ -1,3 +1,4 @@
+import { AdminAuthGuardService } from './../../services/admin-auth-guard/admin-auth-guard.service';
 import { FormsModule } from '@angular/forms';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
@@ -7,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { NewslettersComponent } from './news/newsletters/newsletters.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsletterService } from 'src/app/services/newsletter/newsletter.service';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 @NgModule({
   declarations: [
     AdminOrdersComponent,
@@ -20,20 +22,25 @@ import { NewsletterService } from 'src/app/services/newsletter/newsletter.servic
     RouterModule.forChild([
       {
         path: 'manage/orders',
-        component: AdminOrdersComponent
+        component: AdminOrdersComponent,        
+        canActivate:[AuthGuardService, AdminAuthGuardService]
       },
       {
         path: 'manage/products',
-        component: AdminProductsComponent
+        component: AdminProductsComponent,
+        canActivate:[AuthGuardService, AdminAuthGuardService]
       }, 
       {
         path: 'manage/newsletters',
-        component: NewslettersComponent
+        component: NewslettersComponent,
+        canActivate:[AuthGuardService, AdminAuthGuardService]
       }
     ])
   ],
   providers: [
-    NewsletterService
+    NewsletterService,
+    AuthGuardService,
+    AdminAuthGuardService
   ]
 })
 export class AdministratorModule { }

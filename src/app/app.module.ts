@@ -1,21 +1,22 @@
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
-import { AuthService } from './services/auth/auth.service';
-import { AdministratorModule } from './controllers/administrator-controller/administrator.module';
-import { HomeComponent } from './controllers/public-controller/home/home.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AngularFireModule} from '@angular/fire';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { AngularFireModule} from '@angular/fire';
+import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
-import { NavbarComponent } from './controllers/navbar-controller/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
-import { PublicModule } from './controllers/public-controller/publicController.module';
-import { CustomerControllerModule } from './controllers/customer-controller/customer-controller.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from './services/auth/auth.service';
+import { NavbarComponent } from './controllers/navbar-controller/navbar/navbar.component';
+import { HomeComponent } from './controllers/public-controller/home/home.component';
+import { PublicModule } from './controllers/public-controller/publicController.module';
+import { CustomerControllerModule } from './controllers/customer-controller/customer-controller.module';
+import { AdministratorModule } from './controllers/administrator-controller/administrator.module';
+import { UserService } from './services/user/user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { FormsModule } from '@angular/forms';
   exports:[FormsModule],
   providers: [
     AuthService,
-    AngularFirestore
+    AngularFirestore,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
