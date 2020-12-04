@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
   firebase : {
-    apiKey: "AIzaSyAQNmTP93t7jh9g6doFYrxAOnnly1frcs8",
-    authDomain: "little-shop-angular.firebaseapp.com",
+    apiKey: "AIzaSyC7PyqAOEsnGwkLyQXB01w2oI7QdN5NbAA",
+    authDomain: "littleshop-ad202.firebaseapp.com",
     databaseURL: "https:
-    projectId: "little-shop-angular",
-    storageBucket: "little-shop-angular.appspot.com",
-    messagingSenderId: "869448801378",
-    appId: "1:869448801378:web:359e65987f5de36e"
+    projectId: "littleshop-ad202",
+    storageBucket: "littleshop-ad202.appspot.com",
+    messagingSenderId: "813070471607",
+    appId: "1:813070471607:web:d92939e1ac3218e1"
   }
 };

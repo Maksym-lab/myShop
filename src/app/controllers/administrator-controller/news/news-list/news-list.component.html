@@ -1,0 +1,29 @@
+<div class="newsList">
+  <h2>Old Newsletters</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th>ID</th>
+      <th scope="col">Text</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="newsletters?.length> 0; else noItems">
+    <tr *ngFor = "let letter of newsletters">
+      <th scope="row"> {{letter.title}} </th>
+      <td>{{letter.id}}</td>
+      <td>{{letter.msg}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noItems>
+  <tr>
+    <th>
+      No Newsletters
+    </th>
+    <td>
+      No Newsletters
+    </td>
+  </tr>
+</ng-template>
