@@ -20,7 +20,7 @@ import { UserService } from './services/user/user.service';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

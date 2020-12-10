@@ -8,9 +8,6 @@ import { User } from 'src/app/models/user/user';
   providedIn: 'root'
 })
 export class UserService {
-  get(uid: any) {
-    throw new Error("Method not implemented.");
-  }
   usersCollection: AngularFirestoreCollection<User>;
   users$: Observable<User[]>;
   constructor(private db: AngularFirestore) { 

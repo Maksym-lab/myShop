@@ -22,7 +22,6 @@ export class AuthService {
         if (customer){
           return this.userService.getUser(customer.uid).valueChanges();
         } else {
-          console.log("CUAK")
           return of(null)
         }
       }))
