@@ -11,13 +11,13 @@ export class CategoriesService {
   catsCollection: AngularFirestoreCollection<Category>;
   cats$: Observable<Category[]>; 
   constructor(private db: AngularFirestore) { 
-    this.catsCollection = this.db.collection<Category>('cats', ref => ref.orderBy('title'));
+    this.catsCollection = this.db.collection<Category>('cats', cats => cats.orderBy('title'));
     this.cats$ = this.catsCollection.snapshotChanges()
     .pipe(
       map(changes => {
-        return changes.map( a=> {
-          const data = a.payload.doc.data() as Category;
-          data.id = a.payload.doc.id;
+        return changes.map( fireCat => {
+          const data = fireCat.payload.doc.data() as Category;
+          data.id = fireCat.payload.doc.id;
           return data;
         })
       })

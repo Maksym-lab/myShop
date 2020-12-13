@@ -12,6 +12,8 @@ import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsletterService } from 'src/app/services/newsletter/newsletter.service';
 import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ProductService } from 'src/app/services/product/product.service';
+import { CustomFormsModule } from 'ng2-validation';
 @NgModule({
   declarations: [
     AdminOrdersComponent,
@@ -24,6 +26,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
   imports: [
     CommonModule,
     FormsModule,
+    CustomFormsModule,
     RouterModule.forChild([
       {
         path:'manage/categories',
@@ -55,7 +58,8 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     NewsletterService,
     AuthGuardService,
     AdminAuthGuardService,
-    CategoriesService
+    CategoriesService,
+    ProductService
   ]
 })
 export class AdministratorModule { }
