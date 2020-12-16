@@ -12,7 +12,18 @@ export class ProductService {
   product$: Observable<Product[]>
   constructor(private db: AngularFirestore) { 
     this.productsCollection = this.db.collection('products');
-    this.product$ = this.productsCollection.snapshotChanges()
+  }
+  create(product){
+    this.productsCollection.add(product);
+  }
+  deleteProduct(productId){
+    return this.productsCollection.doc(productId).delete();
+  }
+  update(productID, product){
+    this.getProduct(productID).update(product);
+  }
+  getProducts(){
+    return this.productsCollection.snapshotChanges()
     .pipe(
       map(changes => {
         return changes.map( a=> {
@@ -21,13 +32,8 @@ export class ProductService {
           return data;
         })
       })
-    )
+    );
   }
-  create(product){
-    this.productsCollection.add(product);
-  }
-  deleteProduct(productId){}
-  getProducts(){}
   getProduct(productId): AngularFirestoreDocument<Product>{
     return this.productsCollection.doc(productId);
   }

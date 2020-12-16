@@ -1,3 +1,4 @@
+import { PublicModule } from './../public-controller/publicController.module';
 import { CategoriesService } from './../../services/categories/categories.service';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { AdminAuthGuardService } from './../../services/admin-auth-guard/admin-auth-guard.service';
@@ -14,6 +15,8 @@ import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductService } from 'src/app/services/product/product.service';
 import { CustomFormsModule } from 'ng2-validation';
+import { ProductsListComponent } from './components/products-list/products-list/products-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AdminOrdersComponent,
@@ -21,33 +24,42 @@ import { CustomFormsModule } from 'ng2-validation';
     NewslettersComponent,
     NewsListComponent,
     ProductFormComponent,
-    AdminCategoriesComponent
+    AdminCategoriesComponent,
+    ProductsListComponent
   ],
   imports: [
+    NgbModule,
     CommonModule,
     FormsModule,
+    PublicModule,
     CustomFormsModule,
     RouterModule.forChild([
-      {
-        path:'manage/categories',
-        component: AdminCategoriesComponent,
-        canActivate:[AuthGuardService, AdminAuthGuardService]
-      },
       {
         path: 'manage/products/new',
         component: ProductFormComponent,
         canActivate:[AuthGuardService, AdminAuthGuardService]
       },
       {
+        path: 'manage/products/:id', 
+        component: ProductFormComponent,
+        canActivate:[AuthGuardService, AdminAuthGuardService]
+      },      
+      {
         path: 'manage/products',
         component: AdminProductsComponent,
         canActivate:[AuthGuardService, AdminAuthGuardService]
-      }, 
+      },
+      {
+        path:'manage/categories',
+        component: AdminCategoriesComponent,
+        canActivate:[AuthGuardService, AdminAuthGuardService]
+      },
       {
         path: 'manage/newsletters',
         component: NewslettersComponent,
         canActivate:[AuthGuardService, AdminAuthGuardService]
-      }, {
+      }, 
+      {
         path: 'manage/orders',
         component: AdminOrdersComponent,        
         canActivate:[AuthGuardService, AdminAuthGuardService]

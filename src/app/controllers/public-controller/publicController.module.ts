@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsShowComponent } from './products-show/products-show.component';
+import { ProductCardComponent } from './product-card/product-card/product-card.component';
 @NgModule({
   declarations: [
     HomeComponent,    
     ProductsShowComponent,
     ShoppingCartComponent,
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ProductsShowComponent } from './products-show/products-show.component';
     ])
   ],
   exports:[
-    HomeComponent
+    HomeComponent,
+    ProductCardComponent
   ]
 })
 export class PublicModule { }
