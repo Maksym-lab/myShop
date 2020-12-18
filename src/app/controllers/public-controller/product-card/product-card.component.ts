@@ -1,4 +1,4 @@
-import { Product } from './../../../../models/product/product';
+import { Product } from '../../../models/product/product';
 import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'product-card',

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsShowComponent } from './products-show/products-show.component';
-import { ProductCardComponent } from './product-card/product-card/product-card.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 @NgModule({
   declarations: [
     HomeComponent,    

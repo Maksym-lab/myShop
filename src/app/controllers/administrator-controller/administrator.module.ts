@@ -15,7 +15,7 @@ import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductService } from 'src/app/services/product/product.service';
 import { CustomFormsModule } from 'ng2-validation';
-import { ProductsListComponent } from './components/products-list/products-list/products-list.component';
+import { ProductsListComponent } from './components/products-list/products-list.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
