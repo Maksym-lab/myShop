@@ -1,4 +1,10 @@
 <h1>List Of Products </h1>
+<p>
+  <input 
+  #query
+  (keyup)="filter(query.value)"
+  type="text" class="form-control" placeholder="Search">
+</p>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -9,7 +15,7 @@
   </tr>
   </thead>
   <tbody >
-  <tr *ngFor="let product of products$ | async; index as i">
+  <tr *ngFor="let product of filtered; index as i">
     <th scope="row">{{ i + 1 }}</th>
     <td>
       {{ product.title }}
