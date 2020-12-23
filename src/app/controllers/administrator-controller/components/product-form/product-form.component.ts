@@ -36,4 +36,9 @@ export class ProductFormComponent implements OnInit {
       this.router.navigate(['manage/products']);
       }, 2000);
   }
+  Back(){
+    if(confirm("Are you sure you want to go back without saving?")) {
+      this.router.navigate(['manage/products']);
+    } 
+  }
 }

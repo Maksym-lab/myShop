@@ -11,7 +11,7 @@ import { Product } from 'src/app/models/product/product';
 export class ProductsListComponent implements OnInit, OnDestroy {
   products$ : Observable<Product[]>;
   productsList : Product[];
-  filtered: any[];
+  filtered: Product[];
   subscriptions: Subscription;
   constructor(private productService: ProductService,
     private router: Router) { 

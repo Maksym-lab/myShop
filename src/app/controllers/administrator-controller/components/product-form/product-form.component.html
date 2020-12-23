@@ -1,6 +1,6 @@
 <h1>Add Products</h1>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8 card">
     <form #f="ngForm" (ngSubmit)="save(f.value)">
       <div class="form-group">
         <label for="title">Title</label>
@@ -67,11 +67,12 @@
             <div *ngIf="imageUrl.errors.url">Please enter valid url.</div>
           </div>
       </div>
-      <button class="btn btn-primary">Save</button> 
+      <button class="btn btn-primary">Save</button>       
+      <button type="button" class="btn btn-info" (click)="Back()">Back</button>
     </form>
   </div>
-  <div class="col-md-4"> 
-    <product-card 
+  <div class="col-md-4">  
+    <product-card *ngIf="title.value"
     [title]="title.value"
     [price]="price.value"
     [category]="category.value"

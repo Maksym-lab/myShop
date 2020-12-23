@@ -1,3 +1,14 @@
-<p>
-  products-show works!
-</p>
+<div class="row">
+  <ng-container *ngFor="let p of products$ | async; let i = index">
+      <div class="col">
+          <product-card
+            [title]="p.title"
+            [price]="p.price"
+            [category]="p.category"
+            [imageUrl]="p.imageUrl">
+          </product-card>
+          <div *ngIf="( i + 1) % 2 === 0" class="w-100">
+          </div>
+        </div>
+  </ng-container>  
+</div>
