@@ -1,3 +1,4 @@
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { ShoppingCartComponent } from './../public-controller/shopping-cart/shopping-cart.component';
 import { HomeComponent } from './../public-controller/home/home.component';
 import { NgModule } from '@angular/core';
@@ -5,16 +6,23 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsShowComponent } from './products-show/products-show.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { FilterService } from 'src/app/services/filter/filter.service';
 @NgModule({
   declarations: [
     HomeComponent,    
     ProductsShowComponent,
     ShoppingCartComponent,
     ProductCardComponent,
+    SideBarComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
+      { 
+        path:'products/:id', 
+        component: ProductsShowComponent
+      },
       { 
         path:'products', 
         component: ProductsShowComponent
@@ -28,6 +36,10 @@ import { ProductCardComponent } from './product-card/product-card.component';
   exports:[
     HomeComponent,
     ProductCardComponent
+  ],
+  providers: [
+    CategoriesService,
+    FilterService
   ]
 })
 export class PublicModule { }

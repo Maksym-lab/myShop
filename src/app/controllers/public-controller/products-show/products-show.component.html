@@ -1,14 +1,20 @@
-<div class="row">
-  <ng-container *ngFor="let p of products$ | async; let i = index">
-      <div class="col">
-          <product-card
-            [title]="p.title"
-            [price]="p.price"
-            [category]="p.category"
-            [imageUrl]="p.imageUrl">
-          </product-card>
-          <div *ngIf="( i + 1) % 2 === 0" class="w-100">
-          </div>
+<div class="row mb-4">
+  <div class="col-3">
+    <side-bar></side-bar>
+  </div>
+ <div class="col">
+   <div class="row">
+      <ng-container *ngFor="let p of filteredProducts ; let i = index">
+        <div class="col">
+            <product-card
+              [title]="p.title"
+              [price]="p.price"
+              [category]="p.category"
+              [imageUrl]="p.imageUrl">
+            </product-card>
+          <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
         </div>
-  </ng-container>  
+      </ng-container> 
+    </div>
+  </div>
 </div>

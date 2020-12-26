@@ -45,7 +45,7 @@
           required
           #category="ngModel">
           <option value=""></option>
-          <option [value]="c.id" *ngFor="let c of cats$ | async"> {{c.title}}</option>
+          <option [value]="c.id" *ngFor="let c of cats"> {{c.title}}</option>
         </select>
         <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
           Category is required. 

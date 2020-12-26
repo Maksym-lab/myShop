@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { OrderSuccessComponent } from './order-success.component';
-describe('OrderSuccessComponent', () => {
-  let component: OrderSuccessComponent;
-  let fixture: ComponentFixture<OrderSuccessComponent>;
+import { SideBarComponent } from './side-bar.component';
+describe('SideBarComponent', () => {
+  let component: SideBarComponent;
+  let fixture: ComponentFixture<SideBarComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderSuccessComponent ]
+      declarations: [ SideBarComponent ]
     })
     .compileComponents();
   }));
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderSuccessComponent);
+    fixture = TestBed.createComponent(SideBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

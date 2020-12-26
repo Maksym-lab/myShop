@@ -1,0 +1,28 @@
+<div class="search-wrapper">
+  <div class="input-group mb-4 shadow-sm">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Ϙ</span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by product..."/>
+  </div>
+</div>
+<hr>
+<div class="category-wrapper">
+  <div class="list-group mb-4 shadow-sm">
+    <a class="list-group-item list-group-item-action" 
+      [class.active]="!category" 
+      routerLink="/products/">
+      All categories
+    </a>
+    <a *ngFor="let c of categories$ " 
+      routerLink="/products/" 
+      [queryParams]="{category:c.id}"
+      class="list-group-item list-group-item-action" 
+      [class.active]="category === c.id">
+      {{c.title}}
+    </a>
+  </div>
+</div>
