@@ -1,6 +1,6 @@
 import { switchMap } from 'rxjs/operators';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/categories/category';
@@ -14,10 +14,12 @@ export class SideBarComponent implements OnInit {
   category: string;
   products;
   userSearch = "";
+  @Input() m_category: string;
   constructor(
     route: ActivatedRoute,
     private categoriesServices: CategoriesService,
     private productService: ProductService) { 
+      console.log("mcategory"+this.m_category);
     categoriesServices.getCategories().pipe(
       switchMap( cats => {
         this.categories$ = cats;
