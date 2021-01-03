@@ -1,8 +1,9 @@
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{imageUrl}}" >
+  <img class="card-img-top" src="{{product.imageUrl}}" >
   <div class="card-body">
-    <h5 class="card-title">{{title}}</h5>
-    <p class="card-text">{{price | currency : 'EUR'}}</p>
-    <p class="card-text">{{category}}</p>
+    <h5 class="card-title">{{product.title}}</h5>
+    <p class="card-text">{{product.price | currency : 'EUR'}}</p>
+    <p class="card-text">{{product.category}}</p>
+    <add-product [product]="product"></add-product>
   </div>
 </div>

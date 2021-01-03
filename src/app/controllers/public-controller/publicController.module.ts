@@ -8,6 +8,8 @@ import { ProductsShowComponent } from './products-show/products-show.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { FilterService } from 'src/app/services/filter/filter.service';
+import { AddProductComponent } from './add-product/add-product.component';
+import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
 @NgModule({
   declarations: [
     HomeComponent,    
@@ -15,6 +17,7 @@ import { FilterService } from 'src/app/services/filter/filter.service';
     ShoppingCartComponent,
     ProductCardComponent,
     SideBarComponent,
+    AddProductComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { FilterService } from 'src/app/services/filter/filter.service';
   ],
   providers: [
     CategoriesService,
-    FilterService
+    FilterService,
+    ShoppingCartService
   ]
 })
 export class PublicModule { }

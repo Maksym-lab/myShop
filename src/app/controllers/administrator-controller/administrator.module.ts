@@ -17,6 +17,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductsListComponent } from './components/products-list/products-list.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
 @NgModule({
   declarations: [
     AdminOrdersComponent,
@@ -25,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NewsListComponent,
     ProductFormComponent,
     AdminCategoriesComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    ProductPreviewComponent
   ],
   imports: [
     NgbModule,
