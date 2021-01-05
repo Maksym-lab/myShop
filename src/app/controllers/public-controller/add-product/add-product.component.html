@@ -1,5 +1,23 @@
 <div>
-  <button type="button" class="btn btn-primary" (click)="addToCart()">
+  <button *ngIf="current.quantity <= 0 ; else updateQuantity"
+  type="button" class="btn btn-primary" (click)="addToCart()">
     Add to Cart
   </button>
 </div>
+<ng-template #updateQuantity>
+  <div class="row no-gutters">
+    <div class="col-2">
+      <button
+        (click)="removeFromCart()" 
+        class="btn btn-secondary btn-block">-</button>
+    </div>
+    <div class="col text-center quantity">
+      {{ current.quantity }} in cart
+    </div>
+    <div class="col-2">
+      <button
+        (click)="addToCart()"
+        class="btn btn-secondary btn-block">+</button>
+    </div>
+    </div>
+</ng-template>

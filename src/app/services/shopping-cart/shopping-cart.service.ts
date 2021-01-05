@@ -1,32 +1,34 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { Product } from 'src/app/models/product/product';
 import { ShoppingProduct } from '../../models/shoppingProduct/shopping-product';
+import { shoppingCart } from '../../models/shopping-cart/shopping-cart';
+import { Observable } from 'rxjs';
 @Injectable()
 export class ShoppingCartService {
+  currentCartId: string;
   constructor(
     private db: AngularFireDatabase
   ) { }
-  private async getCart() {
+  public async getCart(){
     let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId).valueChanges();
   }
   private create(){
-    return this.db.list('/shopping-carts').push({
-      dateCreated: new Date().getTime()
-    });
+    let cart : shoppingCart = new shoppingCart;
+    return this.db.list('/shopping-carts').push(cart);
   }
-  async clearCart() {
-    let cartId = await this.getOrCreateCartId();
-    this.db.object('/shopping-carts/' + cartId + '/items').remove();
+  clearCart() {
+    this.db.object('/shopping-carts/' + this.currentCartId + '/items').remove();
   }
-  async removeItem(item: Product) {
-    let cartId = await this.getOrCreateCartId();
-    this.db.object('/shopping-carts/' + cartId + '/items/' + item.id).remove();
+   removeItem(item: Product) {
+    this.db.object('/shopping-carts/' + this.currentCartId + '/items/' + item.id).remove();
   }
-  private getItem(cartId: string, productId: string){
-    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
+  public getItem(productId: string){
+    this.currentCartId = localStorage.getItem('cartId');
+    console.log("current cart ID: ", this.currentCartId);
+    return this.db.object('/shopping-carts/' + this.currentCartId + '/items/' + productId);
   }
   public async addToCart(product: Product) {
     console.log("shopping service adding...");
@@ -35,9 +37,8 @@ export class ShoppingCartService {
   async removeFromCart(product: Product) {
     this.updateItem(product, -1);
   }
-  private async updateItem(product: Product, change: number) {
-    let cartId = await this.getOrCreateCartId();    
-    let item$ = this.getItem(cartId, product.id);
+  private async updateItem(product: Product, change: number) {    
+    let item$ = await this.getItem( product.id);
     item$.valueChanges().pipe(take(1)).subscribe(item => {
       if(item && change>0){        
         console.log("Product in cart, adding 1 item", item );
@@ -62,7 +63,7 @@ export class ShoppingCartService {
   }
   private async deleteOneProduct(item$, item){
     let currentProduct = item as ShoppingProduct;
-    let quantity = currentProduct.quantity;
+    let quantity = currentProduct.quantity;   
     if(quantity<= 1){
       item$.remove();
     } else {
@@ -74,7 +75,8 @@ export class ShoppingCartService {
     let cartId = localStorage.getItem('cartId');
     if(cartId) return cartId;
     let result = await this.create();
-    localStorage.setItem('cartId', result.key);
+    this.currentCartId = result.key;
+    localStorage.setItem('cartId', this.currentCartId);
     return result.key;
   }  
 }
