@@ -10,12 +10,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-  @Input() product: Product = {
-    title:"",
-    price:0,
-    imageUrl:"",
-    category:""
-  };
+  @Input() product: Product;
   current: ShoppingProduct = {
     title:"",
     price:0,
@@ -23,8 +18,7 @@ export class AddProductComponent implements OnInit {
     category:"",
     quantity:0
   };
-   constructor(private shoppingService: ShoppingCartService) { 
-  }
+   constructor(private shoppingService: ShoppingCartService) {  }
   async ngOnInit() {
     this.shoppingService.getItem(this.product.id).valueChanges().subscribe(item => {
       console.log(">",item);
