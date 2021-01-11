@@ -1,6 +1,6 @@
 import { switchMap } from 'rxjs/operators';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/categories/category';
@@ -10,6 +10,7 @@ import { Category } from 'src/app/models/categories/category';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
+  potatos;
   categories$: Category[];
   category: string;
   products;
@@ -19,9 +20,8 @@ export class SideBarComponent implements OnInit {
     route: ActivatedRoute,
     private categoriesServices: CategoriesService,
     private productService: ProductService) { 
-      console.log("mcategory"+this.m_category);
     categoriesServices.getCategories().pipe(
-      switchMap( cats => {
+      switchMap(cats => {
         this.categories$ = cats;
         return route.queryParamMap;
       }))

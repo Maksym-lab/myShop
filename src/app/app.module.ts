@@ -17,10 +17,12 @@ import { PublicModule } from './controllers/public-controller/publicController.m
 import { CustomerControllerModule } from './controllers/customer-controller/customer-controller.module';
 import { AdministratorModule } from './controllers/administrator-controller/administrator.module';
 import { UserService } from './services/user/user.service';
+import { UpdateCartComponent } from './controllers/navbar-controller/update-cart/update-cart.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    UpdateCartComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,8 @@ import { take, map } from 'rxjs/operators';
 import { Product } from 'src/app/models/product/product';
 import { ShoppingProduct } from '../../models/shoppingProduct/shopping-product';
 import { shoppingCart } from '../../models/shopping-cart/shopping-cart';
-import { Observable } from 'rxjs';
+import { Observable, merge } from 'rxjs';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 @Injectable()
 export class ShoppingCartService {
   currentCartId: string;
@@ -14,6 +15,10 @@ export class ShoppingCartService {
   public async getCart(){
     let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId).valueChanges();
+  }
+  public getObjCart(){
+    let id = localStorage.getItem('cartId');
+    return this.db.object('/shopping-carts/' + id);
   }
   private create(){
     let cart : shoppingCart = new shoppingCart;
@@ -27,27 +32,25 @@ export class ShoppingCartService {
   }
   public getItem(productId: string){
     this.currentCartId = localStorage.getItem('cartId');
-    console.log("current cart ID: ", this.currentCartId);
     return this.db.object('/shopping-carts/' + this.currentCartId + '/items/' + productId);
   }
   public async addToCart(product: Product) {
-    console.log("shopping service adding...");
     this.updateItem(product, 1);
+    this.updateTotalProducts(1);
   }
   async removeFromCart(product: Product) {
     this.updateItem(product, -1);
+    this.updateTotalProducts(-1);
   }
   private async updateItem(product: Product, change: number) {    
     let item$ = await this.getItem( product.id);
     item$.valueChanges().pipe(take(1)).subscribe(item => {
       if(item && change>0){        
-        console.log("Product in cart, adding 1 item", item );
         this.addOneProduct(item$, item);
       }else if(item && change<0){
         this.deleteOneProduct(item$, item);
       }
       else if (!item && change >0){
-        console.log("Shopping service creating new product...");
         this.createNewProduct(item$, product);
       }
     });
@@ -70,6 +73,18 @@ export class ShoppingCartService {
       currentProduct.quantity--;
       item$.update(currentProduct);
     }
+  }
+  private updateTotalProducts(change:number){
+    let totalQ;
+    this.getObjCart().valueChanges().
+    pipe(take(1),map(i=>
+      {return i as shoppingCart})
+    )
+    .subscribe(product => {
+      totalQ = product.totalQuantity;
+      totalQ += change;
+      this.getObjCart().update({"totalQuantity":totalQ});
+    }).unsubscribe;
   }
   private async getOrCreateCartId(): Promise<string>{
     let cartId = localStorage.getItem('cartId');

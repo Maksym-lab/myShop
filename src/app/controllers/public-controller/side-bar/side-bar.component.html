@@ -17,7 +17,7 @@
       routerLink="/products/">
       All categories
     </a>
-    <a *ngFor="let c of categories$ " 
+    <a *ngFor="let c of categories$  " 
       routerLink="/products/" 
       [queryParams]="{category:c.id}"
       class="list-group-item list-group-item-action" 

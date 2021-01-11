@@ -45,7 +45,8 @@ export class ProductsShowComponent implements OnInit{
     }))
     .subscribe(params => {
       this.category = params.get('category');
-      this.filteredProducts = this.filterService.filterByCategory(this.products, this.category);
+      this.filteredProducts = this.filterService
+      .filterByCategory(this.products, this.category);
     });
   }
 }

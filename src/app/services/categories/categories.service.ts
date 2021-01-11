@@ -12,6 +12,12 @@ export class CategoriesService {
   cats$: Observable<Category[]>; 
   constructor(private db: AngularFirestore) { 
     this.catsCollection = this.db.collection<Category>('cats', cats => cats.orderBy('title'));
+  }
+  public getCategories(): Observable<Category[]>{
+    this.getSnapshot();
+    return this.cats$;
+  }
+  private getSnapshot(){
     this.cats$ = this.catsCollection.snapshotChanges()
     .pipe(
       map(changes => {
@@ -22,8 +28,5 @@ export class CategoriesService {
         })
       })
     )
-  }
-  getCategories(){
-    return this.cats$;
   }
 }

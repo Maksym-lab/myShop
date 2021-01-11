@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/models/product/product';
 import { ShoppingCartService } from '../../../services/shopping-cart/shopping-cart.service';
-import { shoppingCart } from 'src/app/models/shopping-cart/shopping-cart';
 import { ShoppingProduct } from '../../../models/shoppingProduct/shopping-product';
-import { map } from 'rxjs/operators';
 @Component({
   selector: 'add-product',
   templateUrl: './add-product.component.html',
@@ -20,8 +18,9 @@ export class AddProductComponent implements OnInit {
   };
    constructor(private shoppingService: ShoppingCartService) {  }
   async ngOnInit() {
-    this.shoppingService.getItem(this.product.id).valueChanges().subscribe(item => {
-      console.log(">",item);
+    this.shoppingService.getItem(this.product.id)
+    .valueChanges()
+    .subscribe(item => {      
       if(item){
         this.current = item as ShoppingProduct;
       } else {
