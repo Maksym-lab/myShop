@@ -20,6 +20,10 @@ export class ShoppingCartService {
     let id = localStorage.getItem('cartId');
     return this.db.object('/shopping-carts/' + id);
   }
+  public getListCart(){
+    let id = localStorage.getItem('cartId');
+    return this.db.list('/shopping-carts/'+id+'/items');
+  }
   private create(){
     let cart : shoppingCart = new shoppingCart;
     return this.db.list('/shopping-carts').push(cart);

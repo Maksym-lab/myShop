@@ -1,3 +1,22 @@
-<p>
-  shopping-cart works!
-</p>
+<h1>Your shopping cart</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Count</th>
+    <th scope="col">Title</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Price</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody >
+  <tr *ngFor="let product of products; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{ product.title }}
+    </td>
+    <td>{{ product.quantity }}</td>
+    <td>{{(product.price*product.quantity)}}</td>
+  </tr>
+  </tbody>
+</table>
