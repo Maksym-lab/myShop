@@ -61,15 +61,16 @@ export class ShoppingCartService {
   }
   private async createNewProduct(item$, product:Product){
     let newProduct: ShoppingProduct = new ShoppingProduct(product);
+    console.log(newProduct);
     item$.update(newProduct);
   }
   private async addOneProduct(item$, item){
-    let currentProduct = item as ShoppingProduct;
+    let currentProduct = new ShoppingProduct(item);
     currentProduct.quantity++;
     item$.update(currentProduct);
   }
   private async deleteOneProduct(item$, item){
-    let currentProduct = item as ShoppingProduct;
+    let currentProduct = new ShoppingProduct(item);
     let quantity = currentProduct.quantity;   
     if(quantity<= 1){
       item$.remove();
@@ -82,8 +83,7 @@ export class ShoppingCartService {
     let totalQ;
     this.getObjCart().valueChanges().
     pipe(take(1),map(i=>
-      {return i as shoppingCart})
-    )
+      {return i as shoppingCart}))
     .subscribe(product => {
       totalQ = product.totalQuantity;
       totalQ += change;

@@ -20,6 +20,12 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartService.getListCart().valueChanges()
     .subscribe(items => {
       this.products = items as ShoppingProduct[];
+      let total;
+      this.products.forEach(p=> {
+        let a = p as ShoppingProduct;
+        total += a.price as number;
+        console.log("total: ", total);
+      });
       console.log("products",this.products);
     }).unsubscribe;
   }

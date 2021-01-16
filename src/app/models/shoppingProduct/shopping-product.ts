@@ -9,7 +9,7 @@ export class ShoppingProduct implements Product{
     constructor(product: Product){
         this.id = product.id;
         this.title = product.title;
-        this.price = product.price;
+        this.price = Number(product.price);
         this.imageUrl = product.imageUrl;
         this.category = product.category;
         this.quantity = 1;
