@@ -10,10 +10,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  products:unknown[];
+  products:ShoppingProduct[];
   sc: shoppingCart = new shoppingCart();
-  subscriptions: Subscription;
   cart$;
+  totalprice: number = 0;
   constructor(private shoppingCartService: ShoppingCartService) { }
    ngOnInit() {
     this.cart$ = this.shoppingCartService.getObjCart();
@@ -22,11 +22,9 @@ export class ShoppingCartComponent implements OnInit {
       this.products = items as ShoppingProduct[];
       let total;
       this.products.forEach(p=> {
-        let a = p as ShoppingProduct;
-        total += a.price as number;
-        console.log("total: ", total);
+        this.totalprice += (p.price*p.quantity);
+        console.log("total: ", this.totalprice );
       });
-      console.log("products",this.products);
     }).unsubscribe;
   }
   removeFromCart(){
