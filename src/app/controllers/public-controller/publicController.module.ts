@@ -10,6 +10,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
+import { AddDeleteBtnComponent } from './add-delete-btn/add-delete-btn.component';
 @NgModule({
   declarations: [
     HomeComponent,    
@@ -18,6 +19,7 @@ import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.
     ProductCardComponent,
     SideBarComponent,
     AddProductComponent,
+    AddDeleteBtnComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.
   ],
   exports:[
     HomeComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    AddDeleteBtnComponent
   ],
   providers: [
     CategoriesService,

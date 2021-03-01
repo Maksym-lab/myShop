@@ -65,29 +65,36 @@ export class ShoppingCartService {
     item$.update(newProduct);
   }
   private async addOneProduct(item$, item){
-    let currentProduct = new ShoppingProduct(item);
+    let currentProduct = item;
     currentProduct.quantity++;
     item$.update(currentProduct);
+    console.log(currentProduct);
   }
   private async deleteOneProduct(item$, item){
-    let currentProduct = new ShoppingProduct(item);
+    let currentProduct = item;
     let quantity = currentProduct.quantity;   
+    console.log("quantity: ", quantity);
     if(quantity<= 1){
       item$.remove();
     } else {
       currentProduct.quantity--;
       item$.update(currentProduct);
+      console.log("deleteOne: ", currentProduct);
     }
   }
   private updateTotalProducts(change:number){
-    let totalQ;
+    let totalQ=0;
     this.getObjCart().valueChanges().
     pipe(take(1),map(i=>
-      {return i as shoppingCart}))
+      {
+        return i as shoppingCart
+      }))
     .subscribe(product => {
       totalQ = product.totalQuantity;
       totalQ += change;
-      this.getObjCart().update({"totalQuantity":totalQ});
+      this.getObjCart().update({
+        "totalQuantity":totalQ
+      });
     }).unsubscribe;
   }
   private async getOrCreateCartId(): Promise<string>{
