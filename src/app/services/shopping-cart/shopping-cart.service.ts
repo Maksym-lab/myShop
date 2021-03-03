@@ -29,10 +29,16 @@ export class ShoppingCartService {
     return this.db.list('/shopping-carts').push(cart);
   }
   clearCart() {
-    this.db.object('/shopping-carts/' + this.currentCartId + '/items').remove();
+    let id = localStorage.getItem('cartId');
+    this.db.object('/shopping-carts/' + id + '/items').remove();
+    this.getObjCart().update({
+      "totalPrice":0,
+      "totalQuantity":0
+    });
   }
    removeItem(item: Product) {
-    this.db.object('/shopping-carts/' + this.currentCartId + '/items/' + item.id).remove();
+    let id = localStorage.getItem('cartId');
+    this.db.object('/shopping-carts/' + id  + '/items/' + item.id).remove();
   }
   public getItem(productId: string){
     this.currentCartId = localStorage.getItem('cartId');
@@ -56,30 +62,26 @@ export class ShoppingCartService {
       }
       else if (!item && change >0){
         this.createNewProduct(item$, product);
-      }
+      }      
     });
   }
   private async createNewProduct(item$, product:Product){
     let newProduct: ShoppingProduct = new ShoppingProduct(product);
-    console.log(newProduct);
     item$.update(newProduct);
   }
   private async addOneProduct(item$, item){
     let currentProduct = item;
     currentProduct.quantity++;
     item$.update(currentProduct);
-    console.log(currentProduct);
   }
   private async deleteOneProduct(item$, item){
     let currentProduct = item;
     let quantity = currentProduct.quantity;   
-    console.log("quantity: ", quantity);
     if(quantity<= 1){
       item$.remove();
     } else {
       currentProduct.quantity--;
       item$.update(currentProduct);
-      console.log("deleteOne: ", currentProduct);
     }
   }
   private updateTotalProducts(change:number){

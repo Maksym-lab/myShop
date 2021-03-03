@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../../services/shopping-cart/shopping-cart.service';
 import { shoppingCart } from 'src/app/models/shopping-cart/shopping-cart';
-import { take, map } from 'rxjs/operators';
 import { ShoppingProduct } from '../../../models/shoppingProduct/shopping-product';
-import { Subscription } from 'rxjs';
+import { take, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -11,25 +11,28 @@ import { Subscription } from 'rxjs';
 })
 export class ShoppingCartComponent implements OnInit {
   products:ShoppingProduct[];
-  sc: shoppingCart = new shoppingCart();
-  cart$;
-  totalprice: number = 0;
-  constructor(private shoppingCartService: ShoppingCartService) { }
+  sc: shoppingCart;
+  totalprice: number;
+  constructor(private shoppingCartService: ShoppingCartService,
+    private router: Router) {
+   }
    ngOnInit() {
-    this.cart$ = this.shoppingCartService.getObjCart();
     this.shoppingCartService.getListCart().valueChanges()
     .subscribe(items => {
       this.products = items as ShoppingProduct[];
+      this.totalprice=0;
       this.products.forEach(product => {
-        this.totalprice=0;
         this.totalprice += (product.price * product.quantity);
       });
     }).unsubscribe;
   }
-  removeFromCart(){
-    console.log("To remove");
+  btnClick(){
+    this.shoppingCartService.getObjCart().update({
+      "totalPrice":this.totalprice
+    });
+    this.router.navigateByUrl('/check-out');
   }
-  addToCart(){
-    console.log("To add");
+  clear(){
+    this.shoppingCartService.clearCart();
   }
 }

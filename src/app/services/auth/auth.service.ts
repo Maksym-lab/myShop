@@ -13,6 +13,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AuthService {
   user$: Observable<firebase.User>;
   appUser: Observable<User>;
+  uid:string;
   constructor(private userService: UserService,
     private afAuth: AngularFireAuth,
     private route: ActivatedRoute,
@@ -20,6 +21,7 @@ export class AuthService {
       this.user$ = afAuth.authState;
       this.appUser = this.user$.pipe(switchMap(customer=>{
         if (customer){
+          this.uid=customer.uid;
           return this.userService.getUser(customer.uid).valueChanges();
         } else {
           return of(null)
@@ -33,5 +35,8 @@ export class AuthService {
   }
   logout(){
     this.afAuth.auth.signOut();
+  }
+  getLogedUser(): string{
+   return this.uid;    
   }
 }
