@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import {CheckOutComponent} from './check-out/check-out.component';
 import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
+import { OrdersService } from 'src/app/services/orders/orders.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart/shopping-cart.service';
 @NgModule({
   declarations: [
     MyOrdersComponent, 
@@ -38,7 +41,8 @@ import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service
     ])
   ],
   providers:[
-    AuthGuardService
+    AuthService,
+    OrdersService
   ]
 })
 export class CustomerControllerModule { }
