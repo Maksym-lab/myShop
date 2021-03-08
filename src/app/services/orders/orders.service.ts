@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class OrdersService {
   ref = this.db.list('/orders');
-  appUser;
+  appUser: string;
   shoppingCart;
   constructor(private db: AngularFireDatabase, 
     private authService: AuthService,
@@ -21,15 +21,21 @@ export class OrdersService {
     private router: Router,
     private userService: UserService) { 
     }
+  public getOrders(){
+    this.appUser = this.authService.getLogedUser();
+    return this.db.list('/orders', ref => ref.orderByChild('user').equalTo(this.appUser));    
+  }
+  public getList(){
+  }
   checkout(){
     this.appUser = this.authService.getLogedUser();
-    console.log("U:",this.appUser);
-    let bar: shoppingCart;
-    this.shoppingCartService.getObjCart().valueChanges().pipe(take(1))
+    let currentCart: shoppingCart;
+    this.shoppingCartService.getObjCart()
+    .valueChanges()
+    .pipe(take(1))
     .subscribe(a => {
-      console.log("checkoput ", a);
-      bar = a as shoppingCart;
-      this.placeOrder(bar,this.appUser);
+      currentCart = a as shoppingCart;
+      this.placeOrder(currentCart, this.appUser);
     })
     setTimeout(() => {
       this.router.navigate(['/products']);
@@ -41,6 +47,10 @@ export class OrdersService {
     shoppingcart.user = user;
     this.ref.push(shoppingcart);
   }
-  getOrdersByUser(user:User){
+  getOrdersByUser(){
+    this.appUser = this.authService.getLogedUser();
+    console.log("orderService: ", this.appUser);
+    return this.db.list('/orders', ref => ref.orderByChild('user')
+    .equalTo(this.appUser));
   }
 }

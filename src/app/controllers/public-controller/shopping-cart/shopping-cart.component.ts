@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  products:ShoppingProduct[];
+  products:ShoppingProduct[]= [];
   sc: shoppingCart;
   totalprice: number;
   constructor(private shoppingCartService: ShoppingCartService,

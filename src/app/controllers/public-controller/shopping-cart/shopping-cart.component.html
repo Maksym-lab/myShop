@@ -29,5 +29,7 @@
   </tr>
   </tbody>
 </table>
-<button class="btn btn-primary btn-primary" (click)="btnClick()">Buy</button>
-<button class="btn btn-primary btn-primary" (click)="clear()">Clear</button>
+<div class="buttons" *ngIf="products.length">
+  <button class="btn btn-success"(click)="btnClick()">Buy</button>
+  <button class="btn btn-danger" (click)="clear()">Clear</button>
+</div>

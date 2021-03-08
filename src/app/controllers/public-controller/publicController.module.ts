@@ -11,6 +11,7 @@ import { FilterService } from 'src/app/services/filter/filter.service';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
 import { AddDeleteBtnComponent } from './add-delete-btn/add-delete-btn.component';
+import { ProductService } from '../../services/product/product.service';
 @NgModule({
   declarations: [
     HomeComponent,    
@@ -46,7 +47,8 @@ import { AddDeleteBtnComponent } from './add-delete-btn/add-delete-btn.component
   providers: [
     CategoriesService,
     FilterService,
-    ShoppingCartService
+    ShoppingCartService,
+    ProductService,
   ]
 })
 export class PublicModule { }

@@ -1,5 +1,6 @@
 import { ShoppingProduct } from '../shoppingProduct/shopping-product';
 export class shoppingCart {
+    id?:string;
     dateCreated: number;
     items: ShoppingProduct[] = [];
     totalQuantity:number;
